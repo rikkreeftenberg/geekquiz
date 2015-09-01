@@ -35,7 +35,7 @@
             });
         };
 
-        //Used to add a new record
+        //Used to add a new record ererere
         $scope.addtriviaquestion = function () {
             $scope.loading = true;
             $http.post('/api/triviaquestion/', this.newtriviaquestion).success(function (data) {
