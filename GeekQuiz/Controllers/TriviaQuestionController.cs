@@ -76,7 +76,7 @@ namespace GeekQuiz.Controllers
             return CreatedAtRoute("DefaultApi", new { id = triviaQuestion.Id }, triviaQuestion);
         }
 
-        // PUT api/<controller>/5
+        // PUT api/<controller>/5 testeee
         public HttpResponseMessage Put(int id, [FromBody]TriviaQuestion trivia)
         {
             if (!ModelState.IsValid)
