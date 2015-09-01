@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div id="bodyContainer" ng-app="QuizApp">
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div ng-controller="QuizCtrl" class="container" ng-init="gettriviaquestions()">
+                    <p data-ng-hide="addMode"><a data-ng-click="toggleAdd()" href="javascript:;" class="btn btn-primary">Add New</a></p>
+                    <form name="addTriviaQuestion" data-ng-show="addMode" style="width:600px;margin:0px auto;">
+                        <label>Titls:</label><input type="text" data-ng-model="newtriviaquestion.Title" required />
+                        <br />
+                        <br />
+                        <input type="submit" value="Add" data-ng-click="addtriviaquestion()" data-ng-disabled="!addTriviaQuestion.$valid" class="btn btn-primary" />
+                        <input type="button" value="Cancel" data-ng-click="toggleAdd()" class="btn btn-primary" />
+                        <br /><br />
+                    </form>
+
+                    <table class=" table table-bordered table-hover" style="width:800px">
+                        <tr>
+                            <th>#</th>
+                            <th>Id</th>
+                            <td>Title</td>
+                        </tr>
+
+                        <tr ng-repeat="trivia in triviaquestions">
+                            <td>{{ trivia.displayOrder }}</td>
+                            <td><strong>{{ trivia.id }}</strong></td>
+                            <td>
+                                <p ng-hide="trivia.editMode">{{ trivia.title }}</p>
+                                <input ng-show="trivia.editMode" type="text" ng-model="trivia.title" />
+                                <table class=" table table-bordered table-hover" style="width:300px">
+                                    <tr ng-repeat="option in trivia.options">
+                                        <td><strong>{{ option.id }}</strong></td>
+                                        <td>{{ option.title }}</td>
+                                </table>
+                            </td>
+                            <td>
+                                <p ng-hide="trivia.editMode"><a ng-click="toggleEdit(trivia)" href="javascript:;">Edit</a> | <a ng-click="deletetriviaquestion(trivia)" href="javascript:;">Delete</a></p>
+                                <p ng-show="trivia.editMode"><a ng-click="save(trivia)" href="javascript:;">Save</a> | <a ng-click="toggleEdit(trivia)" href="javascript:;">Cancel</a></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section scripts {
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/app/quiz-controller.js")
+}
